@@ -1,11 +1,11 @@
 from random import randint, sample, choice
 
 main_sizes = [38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
-s = ["Nike", "Adidas", "Reebok"]
+brands = ["Nike", "Adidas", "Reebok"]
 
 
 def generate_list(x):
-    b = [Sneakers(choice(s),
+    b = [Sneakers(choice(brands),
                   sizes=set(sample(main_sizes, randint(1, 10))),
                   price=randint(5000, 50000)) for _ in range(x)]
     return b
@@ -15,7 +15,7 @@ class Sneakers:
     default_ = "Nike"
 
     def __init__(self, **kwargs):
-        self. = kwargs.get('', self.default_)
+        self.brand = kwargs.get('', self.default_)
         self.sizes = kwargs.get('sizes', [])
         self.price = kwargs.get('price', 0)
         # self.f = [self., self.sizes, self.price]

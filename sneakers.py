@@ -1,29 +1,6 @@
-"""
-Домашка на 20.03
-
-Изменить класс Shoes.
-Добавить стиль - список, только то что из справочника, цвета - список из справочника
-Пол: женский, мужской
-
-
-В класс Sneakers
-Добавить сезон, материал верха, внутренний материал
-
-
-Создать класс Heels
-Тип каблука, тип носа, материал верха, внутренний  материал
-Признак что свадебная обувь
-
-Создать класс weddingheels
-Добавить наценку за срочность, по умолчанию x2
-
-*продумать как хранить количество по размерам, как его изменять и так далее
-"""
-
-
 from sneakers_task.shoes import Shoes
 
-sports = {'Волейбол', 'Баскетбол', 'Бег', 'Велосипед'}
+sports = {'football', 'basketball', 'running', 'bicycle'}
 seasons = {'winter', 'autumn', 'summer', 'spring'}
 
 
@@ -31,14 +8,14 @@ class Sneakers(Shoes):
 
     def __init__(self, **kwargs):
         Shoes.__init__(self, **kwargs)
-        self.__sport = kwargs.get('sport', {})
-        self.__season = kwargs.get('season', {})
+        self.__sport = self.preprocessing(kwargs.get('sport', set()))
+        self.__season = self.preprocessing(kwargs.get('season', set()))
 
     def __str__(self):
-        return 'Sneakers: \n' + Shoes.__str__(self) + f'sport - {self.__sport}\n, season - {self.__season}'
+        return Shoes.__str__(self) + f'sport - {self.__sport}\n season - {self.__season}\n'
 
     def __repr__(self):
-        return 'Sneakers: \n' + Shoes.__repr__(self) + f'sport - {self.__sport}\n, season - {self.__season}'
+        return Shoes.__repr__(self) + f'sport - {self.__sport}\n season - {self.__season}\n'
 
     @property
     def sport(self):
@@ -46,19 +23,22 @@ class Sneakers(Shoes):
 
     @sport.setter
     def sport(self, x):
-        if x.intersection(sports):
-            self.__sport = x.intersection(sports)
+        set_x = self.preprocessing(x)
+        if set_x.intersection(sports):
+            self.__sport = set_x.intersection(sports)
         else:
             print('Такие виды спорта отсутсвуют в базе')
 
-    def add_sports(self, x):
-        if x.intersection(sports):
-            self.__sport.intersection_update(x)
+    def add_sport(self, x):
+        set_x = self.preprocessing(x)
+        if set_x.intersection(sports):
+            self.__sport.update(set_x.intersection(sports))
         else:
             print('Такие виды спорта отсутсвуют в базе')
 
-    def delete_sports(self, x):
-        self.__sport.difference_update(x)
+    def delete_sport(self, x):
+        set_x = self.preprocessing(x)
+        self.__sport.difference_update(set_x)
 
     @property
     def season(self):
@@ -66,16 +46,19 @@ class Sneakers(Shoes):
 
     @season.setter
     def season(self, x):
-        if x.intersection(seasons):
-            self.__season = x.intersection(seasons)
+        set_x = self.preprocessing(x)
+        if set_x.intersection(seasons):
+            self.__season = set_x.intersection(seasons)
         else:
             print('Такие сезоны отсутсвуют')
 
-    def add_season(self, x: set):
-        if x.intersection(seasons):
-            self.__season.intersection_update(x)
+    def add_season(self, x):
+        set_x = self.preprocessing(x)
+        if set_x.intersection(seasons):
+            self.__season.update(set_x.intersection(seasons))
         else:
             print('Такие сезоны отсутсвуют')
 
-    def delete_season(self, x: set):
-        self.__season.difference_update(x)
+    def delete_season(self, x):
+        set_x = self.preprocessing(x)
+        self.__season.difference_update(set_x)

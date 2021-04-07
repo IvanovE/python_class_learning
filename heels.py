@@ -7,10 +7,9 @@ nose_types = {'square', 'round', 'acute', 'open'}
 class Heels(Shoes):
 
     def __init__(self, **kwargs):
-        #todo intesection
         Shoes.__init__(self, **kwargs)
-        self.__heel_type = kwargs.get('heel_type', {})
-        self.__nose_type = kwargs.get('nose_type', {})
+        self.__heel_type = self.preprocessing(kwargs.get('heel_type', set()))
+        self.__nose_type = self.preprocessing(kwargs.get('nose_type', set()))
         self.__weddingbool = kwargs.get('weddingbool', False)
 
     def __str__(self):
@@ -26,29 +25,27 @@ class Heels(Shoes):
         return self.__heel_type
 
     @heel_type.setter
-    def heel_type(self, x: set):
-        if x.intersection(heel_types):
-            self.__heel_type = x.intersection(heel_types)
+    def heel_type(self, x):
+        set_x = self.preprocessing(x)
+        if set_x.intersection(heel_types):
+            self.__heel_type = set_x.intersection(heel_types)
 
     @property
     def nose_type(self):
         return self.__nose_type
 
     @nose_type.setter
-    def nose_type(self, x: set):
-        # todo only one item
-        if x.intersection(nose_types):
-            self.__nose_type = x.intersection(nose_types)
+    def nose_type(self, x):
+        set_x = self.preprocessing(x)
+        if set_x in nose_types:
+            self.__nose_type = set_x
+
+    @property
+    def weddingbool(self):
+        return self.__weddingbool
 
     def weeding(self):
         if self.__weddingbool == 1:
             print('Yes')
         else:
             print('No')
-
-    #todo weddingbools property
-
-
-if __name__ == '__main__':
-    w = Heels(price=9000)
-    print(w)
