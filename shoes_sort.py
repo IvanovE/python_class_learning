@@ -15,7 +15,7 @@ def shoes_sort(season=None, wedding=None, color=None, max_price=0, min_price=0, 
         if color:
             data_color = {i for i in data_season if i.color == preprocessing(color)}
         if size:
-            data_size = [i for i in data_season if i.sizes.intesrion(preprocessing(size))]
+            data_size = {i for i in data_season if i.sizes.intersection(preprocessing(size))}
         if min_price and max_price:
             data_price = {i for i in data_season if min_price <= i.price <= max_price}
             data_price_increased_range = {i for i in data_season if i.price <= min_price - 3000 or
@@ -28,14 +28,14 @@ def shoes_sort(season=None, wedding=None, color=None, max_price=0, min_price=0, 
             data_price_increased_range = {i for i in data_season if i.price >= max_price + 3000}
 
 
-        # return
+        # return data_season.intersection(data_size, data_color, data_price)
 
     if wedding:
         data_wedding = {i for i in data if isinstance(i, Weddingheels)}
         if color:
             data_color = {i for i in data_wedding if i.color == preprocessing(color)}
         if size:
-            data_size = [i for i in data_wedding if i.sizes.intesrion(preprocessing(size))]
+            data_size = {i for i in data_wedding if i.sizes.intesrion(preprocessing(size))}
         if min_price and max_price:
             data_price = {i for i in data_wedding if min_price <= i.price <= max_price}
             data_price_increased_range = {i for i in data_wedding if i.price <= min_price - 3000 or
@@ -52,7 +52,7 @@ def shoes_sort(season=None, wedding=None, color=None, max_price=0, min_price=0, 
     if color:
         data_color = {i for i in data if i.color == preprocessing(color)}
         if size:
-            data_size = [i for i in data_color if i.sizes.intesrion(preprocessing(size))]
+            data_size = {i for i in data_color if i.sizes.intesrion(preprocessing(size))}
         if min_price and max_price:
             data_price = {i for i in data_color if min_price <= i.price <= max_price}
             data_price_increased_range = {i for i in data_color if i.price <= min_price - 3000 or
@@ -67,7 +67,7 @@ def shoes_sort(season=None, wedding=None, color=None, max_price=0, min_price=0, 
         # return
 
     if size:
-        data_size = [i for i in data if i.sizes.intesrion(preprocessing(size))]
+        data_size = {i for i in data if i.sizes.intesrion(preprocessing(size))}
         if min_price and max_price:
             data_price = {i for i in data_size if min_price <= i.price <= max_price}
             data_price_increased_range = {i for i in data_size if i.price <= min_price - 3000 or

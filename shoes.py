@@ -221,21 +221,20 @@ class Shoes:
         :param x: Размер обуви, который  требуется (либо число, либо список)
         :return: Количество размеров требуемых размеров
         """
-        if type(x) is list:
-            d = {}
-            for i in x:
-                if i in self.__sizes.keys():
-                    d.update({i: self.__sizes[i]})
-            return d
-        elif x in self.__sizes.keys():
-            return {x: self.__sizes[x]}
+        set_x = self.preprocessing(x)
+        d = {i: self.__sizes.get(i) for i in set_x if i in self.__sizes.keys()}
+        return d
 
     def preprocessing_str(self, x):
+        new_x = set()
         if type(x) is set:
-            x = {i.lower() for i in x if type(i) is str}
+            new_x = {i.lower() for i in x if type(i) is str}
         elif type(x) is str:
-            x = x.lower()
-        return x
+            new_x = x.lower()
+        if new_x:
+            return new_x
+        else:
+            return x
 
     def preprocessing(self, x):
         if type(x) is list:
