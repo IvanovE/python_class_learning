@@ -1,7 +1,9 @@
 from sneakers_task.sneakers import Sneakers
 from sneakers_task.weddingheels import Weddingheels
 
+# test comment
 data = []
+
 
 
 def shoes_sort(season=None, wedding=None, color=None, max_price=0, min_price=0, size=None):
