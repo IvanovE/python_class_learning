@@ -248,3 +248,6 @@ class Shoes:
         if type(x) is tuple:
             return set(x)
         return self.preprocessing_str(x)
+
+    def check_on_stock(self):
+        return {i for i in self.__sizes if self.__sizes[i] > 0}
