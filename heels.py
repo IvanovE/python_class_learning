@@ -10,7 +10,7 @@ class Heels(Shoes):
         Shoes.__init__(self, **kwargs)
         self.__heel_type = self.preprocessing(kwargs.get('heel_type', set()))
         self.__nose_type = self.preprocessing(kwargs.get('nose_type', set()))
-        self.__weddingbool = kwargs.get('weddingbool', False)
+        self.__weddingbool = kwargs.get('wedding', False)
 
     def __str__(self):
         return 'Heels \n' + Shoes.__repr__(self) + f'heel_type - {self.heel_type}\n, nose_type - {self.nose_type},\n' \

@@ -12,10 +12,10 @@ class Sneakers(Shoes):
         self.__season = self.preprocessing(kwargs.get('season', set()))
 
     def __str__(self):
-        return Shoes.__str__(self) + f'sport - {self.__sport}\n season - {self.__season}\n'
+        return 'Sneakers \n' + Shoes.__str__(self) + f'sport - {self.__sport}\n season - {self.__season}\n'
 
     def __repr__(self):
-        return Shoes.__repr__(self) + f'sport - {self.__sport}\n season - {self.__season}\n'
+        return 'Sneakers \n' + Shoes.__repr__(self) + f'sport - {self.__sport}\n season - {self.__season}\n'
 
     @property
     def sport(self):

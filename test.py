@@ -43,7 +43,3 @@ def generate_weddingheels(count):
                      nose_type=sample(list(nose_types), randint(0, 1)))
         result.append(item)
     return result
-
-
-if __name__ == '__main__':
-    print(generate_heels(2))
