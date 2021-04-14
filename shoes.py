@@ -37,6 +37,7 @@ class Shoes:
     def __repr__(self):
         return f'brand  - {self.brand},\n ' \
                f'sizes - {self.sizes},\n' \
+               f'price - {self.price}\n' \
                f'style - {self.style}\n' \
                f'color - {self.color},\n ' \
                f'gender - {self.gender},\n ' \
