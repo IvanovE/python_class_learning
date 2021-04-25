@@ -228,7 +228,7 @@ class Shoes:
 
     def preprocessing_str(self, x):
         new_x = set()
-        if type(x) is set:
+        if type(x) is set or type(x) is tuple:
             new_x = {i.lower() for i in x if type(i) is str}
         elif type(x) is str:
             new_x = x.lower()
