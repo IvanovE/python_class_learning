@@ -37,6 +37,7 @@ class Shoes:
     def __repr__(self):
         return f'brand  - {self.brand},\n ' \
                f'sizes - {self.sizes},\n' \
+               f'price - {self.price}\n' \
                f'style - {self.style}\n' \
                f'color - {self.color},\n ' \
                f'gender - {self.gender},\n ' \
@@ -227,7 +228,7 @@ class Shoes:
 
     def preprocessing_str(self, x):
         new_x = set()
-        if type(x) is set:
+        if type(x) is set or type(x) is tuple:
             new_x = {i.lower() for i in x if type(i) is str}
         elif type(x) is str:
             new_x = x.lower()
@@ -248,3 +249,6 @@ class Shoes:
         if type(x) is tuple:
             return set(x)
         return self.preprocessing_str(x)
+
+    def check_on_stock(self):
+        return {i for i in self.__sizes if self.__sizes[i] > 0}

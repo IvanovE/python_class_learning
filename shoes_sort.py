@@ -1,125 +1,1 @@
-from sneakers_task.sneakers import Sneakers
-from sneakers_task.weddingheels import Weddingheels
-
-data = []
-
-
-def shoes_sort(season=None, wedding=None, color=None, max_price=0, min_price=0, size=None):
-    data_color = set()
-    data_size = set()
-    data_price = set()
-    data_price_increased_range = set()
-
-    if season:
-        data_season = {i for i in data if isinstance(i, Sneakers) and i.season == preprocessing(season)}
-        if color:
-            data_color = {i for i in data_season if i.color == preprocessing(color)}
-        if size:
-            data_size = {i for i in data_season if i.sizes.intersection(preprocessing(size))}
-        if min_price and max_price:
-            data_price = {i for i in data_season if min_price <= i.price <= max_price}
-            data_price_increased_range = {i for i in data_season if i.price <= min_price - 3000 or
-                                          i.price >= max_price + 3000}
-        elif min_price:
-            data_price = {i for i in data_season if min_price <= i.price}
-            data_price_increased_range = {i for i in data_season if i.price <= min_price - 3000}
-        elif max_price:
-            data_price = {i for i in data_season if i.price <= max_price}
-            data_price_increased_range = {i for i in data_season if i.price >= max_price + 3000}
-
-
-        # return data_season.intersection(data_size, data_color, data_price)
-
-    if wedding:
-        data_wedding = {i for i in data if isinstance(i, Weddingheels)}
-        if color:
-            data_color = {i for i in data_wedding if i.color == preprocessing(color)}
-        if size:
-            data_size = {i for i in data_wedding if i.sizes.intesrion(preprocessing(size))}
-        if min_price and max_price:
-            data_price = {i for i in data_wedding if min_price <= i.price <= max_price}
-            data_price_increased_range = {i for i in data_wedding if i.price <= min_price - 3000 or
-                                          i.price >= max_price + 3000}
-        elif min_price:
-            data_price = {i for i in data_wedding if min_price <= i.price}
-            data_price_increased_range = {i for i in data_wedding if i.price <= min_price - 3000}
-        elif max_price:
-            data_price = {i for i in data_wedding if i.price <= max_price}
-            data_price_increased_range = {i for i in data_wedding if i.price >= max_price + 3000}
-
-        # return
-
-    if color:
-        data_color = {i for i in data if i.color == preprocessing(color)}
-        if size:
-            data_size = {i for i in data_color if i.sizes.intesrion(preprocessing(size))}
-        if min_price and max_price:
-            data_price = {i for i in data_color if min_price <= i.price <= max_price}
-            data_price_increased_range = {i for i in data_color if i.price <= min_price - 3000 or
-                                          i.price >= max_price + 3000}
-        elif min_price:
-            data_price = {i for i in data_color if min_price <= i.price}
-            data_price_increased_range = {i for i in data_color if i.price <= min_price - 3000}
-        elif max_price:
-            data_price = {i for i in data_color if i.price <= max_price}
-            data_price_increased_range = {i for i in data_color if i.price >= max_price + 3000}
-
-        # return
-
-    if size:
-        data_size = {i for i in data if i.sizes.intesrion(preprocessing(size))}
-        if min_price and max_price:
-            data_price = {i for i in data_size if min_price <= i.price <= max_price}
-            data_price_increased_range = {i for i in data_size if i.price <= min_price - 3000 or
-                                          i.price >= max_price + 3000}
-        elif min_price:
-            data_price = {i for i in data_size if min_price <= i.price}
-            data_price_increased_range = {i for i in data_color if i.price <= min_price - 3000}
-        elif max_price:
-            data_price = {i for i in data_size if i.price <= max_price}
-            data_price_increased_range = {i for i in data_size if i.price >= max_price + 3000}
-
-        # return
-
-    if min_price and max_price:
-        data_price = {i for i in data if min_price <= i.price <= max_price}
-        data_price_increased_range = {i for i in data_color if i.price <= min_price - 3000 or
-                                      i.price >= max_price + 3000}
-    elif min_price:
-        data_price = {i for i in data if min_price <= i.price}
-        data_price_increased_range = {i for i in data_color if i.price <= min_price - 3000}
-    elif max_price:
-        data_price = {i for i in data if i.price <= max_price}
-        data_price_increased_range = {i for i in data_color if i.price >= max_price + 3000}
-
-    # return
-
-
-def preprocessing_str(x):
-    if type(x) is set:
-        x = {i.lower() for i in x if type(i) is str}
-    elif type(x) is str:
-        x = x.lower()
-    return x
-
-
-def preprocessing(x):
-    if type(x) is list:
-        return preprocessing_str(set(x))
-    if type(x) is int or type(x) is str:
-        empty_set = set()
-        empty_set.add(x)
-        return preprocessing_str(empty_set)
-    if type(x) is set:
-        return preprocessing_str(x)
-    if type(x) is tuple:
-        return set(x)
-    return preprocessing_str(x)
-
-
-if __name__ == '__main__':
-    s = Sneakers(brand='Nike', season='summer', sizes={39: 1, 40: 1})
-    p = Sneakers(brand='Adidas')
-    t = Weddingheels()
-    data = [s, p, t]
-    print(shoes_sort(season='summer'))
+from sneakers_task.sneakers import Sneakersfrom sneakers_task.weddingheels import Weddingheelsfrom sneakers_task import test_generatedata = []def shoes_sort(data, season=None, wedding=None, color=None, max_price=0, min_price=0, size=None):    """    Подборка обуви по заданным пользователем параметрам    :param season: требуемые сезоны    :param wedding: признак свадебности    :param color: требуемые цвета    :param max_price: максимальная требуемая цена    :param min_price: минимальная требуемая цена    :param size: требуемые размеры    :return: подборка обуви по требованиям клиента    """    return_data = set()    data_price_increase = set()    data_price_decrease = set()    if season and wedding:        return 'Error'    if season:        return_data = {i for i in data if isinstance(i, Sneakers) and preprocessing(season).intersection(i.season)}    if wedding:        return_data = {i for i in data if isinstance(i, Weddingheels)}    if return_data == set():        return_data = data    if color:        return_data = {i for i in return_data if i.color.intersection(preprocessing(color))}    if size:        return_data = {i for i in return_data if i.check_on_stock().intersection(preprocessing(size))}    if max_price:        data_price_increase = {i for i in return_data if max_price < i.price <= max_price + 3000}        data_price_decrease = {i for i in return_data if min_price - 3000 <= i.price < min_price}        return_data = {i for i in return_data if min_price <= i.price <= max_price}    elif min_price:        data_price_decrease = {i for i in return_data if min_price - 3000 <= i.price < min_price}        return_data = {i for i in return_data if min_price <= i.price}    return return_data, data_price_decrease, data_price_increasedef preprocessing_str(x):    """    Приведение данных к нижнему регистру в зависимости от типа данных    :param x: тип данных    :return: тип данных с нижним регистром    """    new_x = set()    if type(x) is set or type(x) is tuple:        new_x = {i.lower() for i in x if type(i) is str}    elif type(x) is str:        new_x = x.lower()    if new_x:        return new_x    else:        return xdef preprocessing(x):    """    Приведение к типу set в зависимости от типа входимых данных    :param x: тип данных    :return: set, который нужно передать в функцию preprocessing_str    """    if type(x) is list:        return preprocessing_str(set(x))    if type(x) is int:        empty_set = set()        empty_set.add(x)        return empty_set    if type(x) is str:        empty_set = set()        empty_set.add(x)        return preprocessing_str(empty_set)    if type(x) is set:        return preprocessing_str(x)    if type(x) is tuple:        return preprocessing_str(set(x))    return preprocessing_str(x)if __name__ == '__main__':    data = test_generate.generate_sneakers(10) + test_generate.generate_weddingheels(5) + test_generate.generate_heels(4)    print(data)    print('\n\n\n')    print(shoes_sort(data, size=40, min_price=10000, max_price=15000))
